@@ -1,24 +1,21 @@
-<a href="/logout">Logout</a>
 
 <div class="container">
   <h1>Welcome To THe WORLD!</h1>
 
-  <table>
-    <tr>
-      <th>File Description</th>
-      <th>File Location</th>
-    </tr>
-    <tr>
-      <td>This view file</td>
-      <td><code><%= __FILE__.gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The layout file</td>
-      <td><code><%= File.expand_path('../layout.erb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-    <tr>
-      <td>The current controller</td>
-      <td><code><%= File.expand_path('../../controllers/index.rb', __FILE__).gsub(Sinatra::Application.root, '') %></code></td>
-    </tr>
-  </table>
+  <section class="Questions">
+    <h1>Most asked qudestions</h1>
+    <ul class="requested">
+      <% @question.each do |question| %>
+        <li class="QS">
+          <article>
+            <a href="/questions/<%= question.id %>"><%= question.title %></a>
+
+          </article>
+        </li>
+      <% end %>
+    </ul>
+  </section>
+
 </div>
+
+
