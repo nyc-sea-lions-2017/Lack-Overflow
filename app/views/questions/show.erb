@@ -1,13 +1,22 @@
 <div class= 'container'>
-  Title: <%= @question.title %>
-  Question: <%= @question.body %>
+  <h1>Title: <%= @question.title %></h1><br>
+  Question: <article><%= @question.body %></article>
+  <% if session[:user_id] == @question.creator_id %>
+  <a href='/questions/<%=@question.id%>/edit'>Edit Question</a>
+  <% end %>
+  <br>
+
   <% if @question.answers %>
   <% @question.answers.each do |answer| %>
-    <%= answer.text %>
+
+    <article><%= answer.text %></article>
+
+    <% end %>
   <% end %>
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
-      <%= comment.text %>
+      <article><%= comment.text %></article>
+
     <% end %>
 
   <%else %>
