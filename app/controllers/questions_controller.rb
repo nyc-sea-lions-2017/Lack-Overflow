@@ -36,7 +36,8 @@ end
 #new edit submission
 put '/questions/:id' do
   @question = Question.find(params[:id])
-  
+  @question.update_attributes(title: params[:question][:title], body: params[:question][:body])
+  redirect "/questions/#{@question.id}"
 end
 
 #delete specific question
