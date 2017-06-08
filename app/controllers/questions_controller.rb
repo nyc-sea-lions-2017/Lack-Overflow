@@ -43,5 +43,8 @@ end
 #delete specific question
 
 delete '/questions/:id' do
+  question = Question.find(params[:id])
+  question.destroy
+  redirect '/'
 
 end
