@@ -1,3 +1,4 @@
+
 # Set up gems listed in the Gemfile.
 # See: http://gembundler.com/bundler_setup.html
 #      http://stackoverflow.com/questions/7243486/why-do-you-need-require-bundler-setup
@@ -7,10 +8,10 @@ require 'bundler/setup' if File.exists?(ENV['BUNDLE_GEMFILE'])
 
 # Require gems we care about
 require 'rubygems'
-
+require 'faker'
 require 'uri'
 require 'pathname'
-
+require 'pry'
 require 'pg'
 require 'active_record'
 require 'logger'
@@ -20,7 +21,7 @@ require "sinatra/reloader" if development?
 
 require 'erb'
 require 'bcrypt'
-require 'faker'
+require 'pry-byebug'
 
 # Some helper constants for path-centric logic
 APP_ROOT = Pathname.new(File.expand_path('../../', __FILE__))
