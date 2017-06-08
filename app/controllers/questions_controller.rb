@@ -21,7 +21,8 @@ end
 
 #get question by id
 get '/questions/:id' do
-
+  @question = Question.find(params[:id])
+  erb :'/questions/show'
 end
 
 #edit specific question

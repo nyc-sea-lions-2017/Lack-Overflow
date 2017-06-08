@@ -1,0 +1,11 @@
+<div class= 'container'>
+  Title: <%= @question.title %>
+  Question: <%= @question.body %>
+  <% if @question.comments %>
+    <%= @question.comments %>
+  <%else %>
+    No questions yet!
+  <% end %>
+
+
+</div>
