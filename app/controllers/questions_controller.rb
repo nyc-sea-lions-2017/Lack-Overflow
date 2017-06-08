@@ -1,6 +1,6 @@
 #all questions
 get '/questions' do
-  @question = Question.all
+
   redirect '/'
 end
 
