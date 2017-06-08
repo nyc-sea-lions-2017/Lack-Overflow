@@ -1,0 +1,12 @@
+<h1> Edit</h1>
+
+<form action='/questions/<%=@question.id%>' method = "post">
+  <input name = '_method' type ="hidden" value = "put">
+  <ol>
+  <textarea name="question[title]" cols="60"><%= @question.title %></textarea>
+  <ol>
+    <textarea name="question[body]" cols ="60" rows = "30"><%= @question.body %></textarea>
+    <br>
+  <input type="submit" value = "Submit">
+
+</form>

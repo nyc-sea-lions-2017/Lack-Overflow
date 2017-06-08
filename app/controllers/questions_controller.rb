@@ -27,12 +27,16 @@ end
 
 #edit specific question
 get '/questions/:id/edit' do
-
+  @question = Question.find(params[:id])
+  erb :'/questions/edit'
 end
+
+
 
 #new edit submission
 put '/questions/:id' do
-
+  @question = Question.find(params[:id])
+  
 end
 
 #delete specific question
