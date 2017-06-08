@@ -1,8 +1,15 @@
 <div class= 'container'>
   Title: <%= @question.title %>
   Question: <%= @question.body %>
+  <% if @question.answers %>
+  <% @question.answers.each do |answer| %>
+    <%= answer.text %>
+  <% end %>
   <% if @question.comments %>
-    <%= @question.comments %>
+    <% @question.comments.each do |comment| %>
+      <%= comment.text %>
+    <% end %>
+
   <%else %>
     No questions yet!
   <% end %>
