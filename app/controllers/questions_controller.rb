@@ -7,7 +7,11 @@ end
 
 #new post form
 get '/questions/new' do
-  erb :'/questions/new'
+  if current_user
+    erb :'/questions/new'
+  else
+    redirect '/login'
+  end
 end
 
 
@@ -28,8 +32,13 @@ end
 
 #edit specific question
 get '/questions/:question_id/edit' do
-  @question = Question.find(params[:question_id])
-  erb :'/questions/edit'
+  question = Question.find(params[:question_id])
+  if current_user.id == question.creator_id
+    @question = Question.find(params[:question_id])
+    erb :'/questions/edit'
+  else
+    erb :'/sessions/login'
+  end
 end
 
 
@@ -55,15 +64,19 @@ post '/questions/:question_id/vote' do
 end
 
 delete '/questions/:question_id' do
-  question = Question.find(params[:question_id])
-  question.destroy
-  redirect '/'
+  if current_user
+    question = Question.find(params[:question_id])
+    question.destroy
+    redirect '/'
+  else
+    redirect '/'
+  end
 
 end
 
 delete '/questions/:question_id/answers/:id/downvote' do
   vote = Vote.find_by(votable_type: "Answer", votable_id: params[:id], voter_id: current_user.id)
-  if vote
+  if vote && current_user
     vote.destroy
     redirect "/questions/#{params[:question_id]}"
   else
@@ -73,7 +86,7 @@ end
 
 delete '/questions/:question_id/downvote' do
   vote = Vote.find_by(votable_id: params[:question_id], votable_type: 'Question', voter_id: current_user.id)
-  if vote
+  if vote && current_user
     vote.destroy
     redirect '/'
   else
