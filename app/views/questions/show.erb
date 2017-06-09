@@ -1,9 +1,11 @@
 <div class= 'container'>
-  <a href='/questions/<%=@question.id%>/edit'>Edit Question</a>
-  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a>
+
 
 
   <h1>Title: <%= @question.title %></h1><br>
+  <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
+  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a><br>
+  <br>
   Question: <article><%= @question.body %></article>
   <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
   <% if current_user.id == @question.creator_id %>
@@ -33,8 +35,12 @@
     <br>
 
     Vote Count: <%= answer.votes.length %>
+    <br>
     <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/vote' method = 'post'>
       <input type = 'submit' value= 'Upvote'>
+    </form>
+    <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
+      <input type = 'submit' value='downvote'>
     </form>
 
 
