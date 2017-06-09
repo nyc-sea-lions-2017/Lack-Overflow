@@ -6,7 +6,8 @@
   <h1>Title: <%= @question.title %></h1><br>
   Question: <article><%= @question.body %></article>
   <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
-  <input type="submit" value="Delete">       </form>
+  <input type="submit" value="Delete">
+  </form>
 
 
 
@@ -17,11 +18,13 @@
     <% @question.answers.each do |answer| %>
       <article><%= answer.text %></article>
       <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">Edit Answer</a>
-      <form method="post" action="/questions/<%= @question.id %>/answers/<%=answer.id%>">  <input type="hidden" name="_method" value="delete">
-        <input type="submit" value="Delete">
+      <form method="post" action="/questions/<%= @question.id %>/answers/<%=answer.id%>">
+        <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="delete">
       </form>
         <form action = '/questions/vote' method = 'post'>
       <input type = 'submit' value= 'Upvote'>
+    </form>
     <% end %>
   <% end %>
   <% if @question.comments %>
