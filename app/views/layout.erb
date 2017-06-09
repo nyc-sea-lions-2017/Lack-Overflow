@@ -25,11 +25,22 @@
  
  <nav>
     <div class="nav-wrapper">
-      <a href="#!" class="brand-logo right">Lack Overflow</a>
+      <a href="/" class="brand-logo right">Lack Overflow</a>
       <ul class="left hide-on-med-and-down">
-        <li><a href="/">Home</a></li>
+       <% if logged_in %>
+    <li> <a href="/users/<%=current_user.id %>"><%= "#{current_user.name}" %></a></li>
+    <li><a href="/logout">Logout</a></li>
+    <li><a href="/">home</a></li>
+    <% if params[:question_id] == question.id %>
+     <li><a href='/questions/<%=@question.id%>/edit'>Edit Question</a></li>
+    <li><a href='/questions/<%=@question.id%>/answers/new'>New Answer</a></li>
+    <% end %>
+  <% else %>
+    <li> <a href="/login">Login</a></li>
+    <li> <a href="/users/new">Register</a></li>
+    <% end %>
         <li><a href="/questions/new">New Question</a></li>
-        <li class="active"><a href="collapsible.html">Question</a></li>
+        </li>
       </ul>
     </div>
   </nav>
@@ -37,14 +48,6 @@
 </head>
 <body>
   <ul>
-    <% if logged_in %>
-    <li> <a href="/users/<%=current_user.id %>"><%= "#{current_user.name}" %></a></li>
-    <li><a href="/logout">Logout</a></li>
-    <li><a href="/">home</a></li>
-  <% else %>
-    <li> <a href="/login">Login</a></li>
-    <li> <a href="/users/new">Register</a></li>
-    <% end %>
   </ul>
   <%= yield %>
 </body>

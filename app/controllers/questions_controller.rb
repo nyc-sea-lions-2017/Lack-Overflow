@@ -43,8 +43,9 @@ put '/questions/:question_id' do
   redirect "/questions/#{@question.question_id}"
 end
 
-post '/questions/:question_id/vote' do
 
+
+post '/questions/:question_id/vote' do
   question = Question.find(params[:id])
   if session[:user_id]
     vote = Vote.new(votable_id:params[:id], votable_type: "Question", voter_id: current_user.id)
