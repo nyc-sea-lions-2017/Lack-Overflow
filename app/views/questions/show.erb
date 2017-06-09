@@ -11,8 +11,10 @@
 
   <% if @question.answers %>
   <% @question.answers.each do |answer| %>
-
+    </form>
     <article><%= answer.text %></article>
+    <form action = '/questions/vote' method = 'post'>
+      <input type = 'submit' value= 'Upvote'>
 
     <% end %>
   <% end %>

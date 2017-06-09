@@ -1,6 +1,6 @@
 #all questions
 get '/questions' do
-
+  @question = Question.all
   redirect '/'
 end
 
@@ -41,6 +41,15 @@ put '/questions/:id' do
 end
 
 #delete specific question
+post '/questions/:id/vote' do
+  question = Question.find(params[:id])
+  if session[:user_id]
+    vote = Vote.new(votable_id:question.id, votable_type: "Question", voter_id: current_user.id)
+    vote.save
+  else
+    redirect '/'
+  end
+end
 
 delete '/questions/:id' do
   question = Question.find(params[:id])

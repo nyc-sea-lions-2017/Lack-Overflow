@@ -9,6 +9,8 @@
         <li class="QS">
           <article>
             <a href="/questions/<%= question.id %>"><%= question.title %></a>
+            <form action = "/questions/<%=question.id%>/vote" method= 'post'>
+              <input type='submit' value = 'Upvote'>
 
           </article>
         </li>
@@ -17,5 +19,3 @@
   </section>
 
 </div>
-
-
