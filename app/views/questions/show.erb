@@ -1,32 +1,34 @@
 <div class= 'container'>
   <a href='/questions/<%=@question.id%>/edit'>Edit Question</a>
+  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a>
+
 
   <h1>Title: <%= @question.title %></h1><br>
   Question: <article><%= @question.body %></article>
-  <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">         <input type="submit" value="Delete">       </form>
+  <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
+  <input type="submit" value="Delete">       </form>
 
 
 
   <br>
 
   <% if @question.answers %>
-  <% @question.answers.each do |answer| %>
-    </form>
-    <article><%= answer.text %></article>
-    <form action = '/questions/vote' method = 'post'>
-      <input type = 'submit' value= 'Upvote'>
 
+    <% @question.answers.each do |answer| %>
+      <article><%= answer.text %></article>
+      <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">Edit Answer</a>
+      <form method="post" action="/questions/<%= @question.id %>/answers/<%=answer.id%>">  <input type="hidden" name="_method" value="delete">
+        <input type="submit" value="Delete">
+      </form>
+        <form action = '/questions/vote' method = 'post'>
+      <input type = 'submit' value= 'Upvote'>
     <% end %>
   <% end %>
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
       <article><%= comment.text %></article>
-
-    <% end %>
-
+  <% end %>
   <%else %>
     No questions yet!
   <% end %>
-
-
 </div>
