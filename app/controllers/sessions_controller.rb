@@ -9,7 +9,7 @@ post '/login' do
     redirect "/"
   else
     @errors = ["Invalid Email or Password"]
-    erb :"/sessions/new"
+    erb :"/sessions/login"
   end
 end
 

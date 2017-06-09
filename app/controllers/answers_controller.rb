@@ -39,6 +39,17 @@ put '/questions/:question_id/answers/:answer_id' do
   erb :"/questions/show"
 end
 
+post '/questions/:question_id/answers/:answer_id/vote' do
+  if current_user
+    answer= Answer.find(params[:answer_id])
+    vote = Vote.new(votable_id: params[:answer_id], votable_type: "Answer", voter_id: current_user.id)
+    vote.save
+    redirect "/questions/#{params[:question_id]}"
+  else
+    redirect "/login"
+  end
+end
+
 #delete specific question
 
 delete '/questions/:question_id/answers/:answer_id' do
