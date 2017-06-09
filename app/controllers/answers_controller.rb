@@ -33,7 +33,7 @@ end
 put '/questions/:question_id/answers/:answer_id' do
   @question = Question.find(params[:question_id])
   @answer = @question.answers.find(params[:answer_id])
-  binding.pry
+  # binding.pry
   @answer.update_attributes(text: params[:answer][:text])
 
   erb :"/questions/show"
@@ -46,5 +46,5 @@ delete '/questions/:question_id/answers/:answer_id' do
   question = Question.find(params[:question_id])
   answer = question.answers.find(params[:answer_id])
   answer.destroy
-  redirect '/'
+  redirect '/questions/#{question.id}'
 end
