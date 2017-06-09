@@ -23,6 +23,14 @@
   <% @question.answers.each do |answer| %>
 
   Answer:<article><%= answer.text %></article>
+  <% if current_user && current_user.id == answer.answerer_id%>
+  <form method="post" action="/questions/:question_id/answers/<%=answer.id%>">
+  <input type="hidden" name="_method" value="put">
+  </form>
+  <form method="post" action="/questions/:question_id/answers/<%=answer.id%>">
+   <input type="hidden" name="_method" value="delete">
+  </form>
+  <% end %>
 
       <% if !answer.comments.empty? %>
       Answer Comment: <% answer.comments.each do |comment| %>
