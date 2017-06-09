@@ -5,15 +5,18 @@
 
   <section class="Questions">
     <h1>Commonly asked questions:</h1>
-    <ul class="requested">
+    <ul class="collection with-header">
+      <li class="collection-header"><h4 class="feature green-text">Featured Questions</h4></li>
       <% @question.each do |question| %>
-        <li class="QS">
+        <li class="collection-item">
           <article>
             Vote Count: <%= question.votes.length %>
             <form action = "/questions/<%=question.id%>/vote" method= 'post'>
-              <input type='submit' value = 'Upvote'>
+              <input type='submit' value = 'Upvote'
+              >
             </form>
-            <form action = "/questions/<%=question.id%>/downvote" method= 'post'>
+
+            <form action= "/questions/<%=question.id%>/downvote" method= 'post'>
               <input type='submit' value = 'Downvote'>
               <input type="hidden" name="_method" value="delete">
             </form>
