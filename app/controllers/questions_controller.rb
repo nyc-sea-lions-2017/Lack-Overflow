@@ -43,7 +43,7 @@ put '/questions/:question_id' do
   redirect "/questions/#{@question.question_id}"
 end
 
-post '/questions/:id/vote' do
+post '/questions/:question_id/vote' do
 
   question = Question.find(params[:id])
   if session[:user_id]
