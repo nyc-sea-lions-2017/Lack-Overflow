@@ -30,12 +30,13 @@ end
 
 
 #new edit submission
-put '/questions/:question_id/answers/:answer_id/edit' do
+put '/questions/:question_id/answers/:answer_id' do
   @question = Question.find(params[:question_id])
   @answer = @question.answers.find(params[:answer_id])
+  binding.pry
   @answer.update_attributes(text: params[:answer][:text])
 
-  redirect "/questions/#{@question.id}"
+  erb :"/questions/show"
 end
 
 #delete specific question
