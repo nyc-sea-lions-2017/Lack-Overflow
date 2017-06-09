@@ -18,15 +18,6 @@ post '/questions' do
   redirect "/questions/#{question.id}"
 end
 
-delete '/questions/:question_id/answers/:id/downvote' do
-  vote = Vote.find_by(votable_type: "Answer", votable_id: params[:id], voter_id: current_user.id)
-  if vote
-    vote.destroy
-    redirect "/questions/#{params[:question_id]}"
-  else
-    redirect "/questions/#{params[:question_id]}"
-  end
-end
 #get question by id
 get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
@@ -53,11 +44,11 @@ end
 
 
 post '/questions/:question_id/vote' do
-  question = Question.find(params[:id])
-  if session[:user_id]
-    vote = Vote.new(votable_id:params[:id], votable_type: "Question", voter_id: current_user.id)
+  question = Question.find(params[:question_id])
+  if current_user
+    vote = Vote.new(votable_id:params[:question_id], votable_type: "Question", voter_id: current_user.id)
     vote.save
-    redirect "/questions/#{question.id}"
+    redirect "/"
   else
     redirect '/'
   end
@@ -68,4 +59,24 @@ delete '/questions/:question_id' do
   question.destroy
   redirect '/'
 
+end
+
+delete '/questions/:question_id/answers/:id/downvote' do
+  vote = Vote.find_by(votable_type: "Answer", votable_id: params[:id], voter_id: current_user.id)
+  if vote
+    vote.destroy
+    redirect "/questions/#{params[:question_id]}"
+  else
+    redirect "/questions/#{params[:question_id]}"
+  end
+end
+
+delete '/questions/:question_id/downvote' do
+  vote = Vote.find_by(votable_id: params[:question_id], votable_type: 'Question', voter_id: current_user.id)
+  if vote
+    vote.destroy
+    redirect '/'
+  else
+    redirect '/'
+  end
 end
