@@ -1,5 +1,5 @@
 <h1>Add a new comment!</h1>
-<form action='questions/<%= params[:question_id] || params[:answer_id] %>/comments' method='post'>
+<form action='/questions/<%= params[:question_id]%>/comments' method='post'>
 <input type='text' name='text' placeholder='Comment Here'>
 <input type='submit' name='Submit' value='Submit'>
 </form>
