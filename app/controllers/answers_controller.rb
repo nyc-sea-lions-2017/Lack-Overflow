@@ -14,14 +14,14 @@ post '/questions/:question_id/answers' do
 end
 
 
-#get question by id
+#get answer by id
 get '/questions/:question_id/answer/:answer_id' do
   @question = Question.find(params[:question_id])
   @question = @question.answers.find(params[:answer_id])
   erb :'/questions/show'
 end
 
-#edit specific question
+#edit answer question
 get '/questions/:question_id/answers/:answer_id/edit' do
   @question = Question.find(params[:question_id])
   @answer = @question.answers.find(params[:answer_id])

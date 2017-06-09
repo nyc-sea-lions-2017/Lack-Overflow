@@ -19,20 +19,32 @@
 
   <% if @question.answers %>
 
-  <% @question.answers.each do |answer| %>
+    <% @question.answers.each do |answer| %>
 
-  Answer:<article><%= answer.text %></article>
+    Answer:</article><%= answer.text %></article>
+    <% if current_user.id == answer.answerer.id%>
+      <form method="post" action="/questions/:question_id/answers/<%=answer.id%>"> <input type="hidden" name="_method" value="put">
+      </form>
+      <form method="post" action="/questions/:question_id/answers/<%=answer.id%>"> <input type="hidden" name="_method" value="delete">
+      </form>
+    <% end %>
 
-      <% if !answer.comments.empty? %>
-      Answer Comment: <% answer.comments.each do |comment| %>
-          <%= comment.text%>
-          <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
-            <input type = 'submit' value= 'Upvote'>
-          </form>
+    <% if current_user.id == @question.creator_id %>
+      <form>
+      <input type="submit" value="Delete">
+      </form>
+        <% if !answer.comments.empty? %>
+          Answer Comment: <% answer.comments.each do |comment| %>
+            <%= comment.text%>
+            <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
+              <input type = 'submit' value= 'Upvote'>
+            </form>
           <% end %>
-
+        <%end%>
       <%end%>
-    <br>
+    <%end%>
+  <%end%>
+      <br>
 
     Vote Count: <%= answer.votes.length %>
     <br>
@@ -42,17 +54,15 @@
     <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
       <input type = 'submit' value='downvote'>
     </form>
-
-
-
-  <% end %>
+    <% end %>
 
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
-      <article><%= comment.text %></article>
-      <% end %>
+    <article><%= comment.text %></article>
   <%else %>
     No questions yet!
-  <% end %>
+    <% end %>
+  <%end%>
 <% end %>
+<%end%>
 </div>
