@@ -41,7 +41,7 @@ put '/questions/:question_id' do
 end
 
 #delete specific question
-post '/questions/:id/vote' do
+post '/questions/:question_id/vote' do
   question = Question.find(params[:id])
   if session[:user_id]
     vote = Vote.new(votable_id:question.id, votable_type: "Question", voter_id: current_user.id)
