@@ -16,6 +16,11 @@
               >
             </form>
 
+            <form action= "/questions/<%=question.id%>/downvote" method= 'post'>
+              <input type='submit' value = 'Downvote'>
+              <input type="hidden" name="_method" value="delete">
+            </form>
+
             <a href="/questions/<%= question.id %>"><%= question.title %></a>
 
           </article>
