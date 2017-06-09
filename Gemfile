@@ -15,6 +15,14 @@ gem 'rake'
 gem 'shotgun', '~>0.9.1'
 gem 'bcrypt'
 gem 'pry'
+<<<<<<< HEAD
+=======
+gem 'pry-byebug'
+gem 'materialize-sass'
+gem 'sass-rails', '~> 5.0'
+
+
+>>>>>>> 1e2ea6194c6ec47f36d39c2602196924b2b1a4ea
 group :test do
   gem 'shoulda-matchers'
   gem 'rack-test'
