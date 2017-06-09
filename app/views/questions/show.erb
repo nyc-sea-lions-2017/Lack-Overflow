@@ -13,12 +13,15 @@
   <br>
 
   <% if @question.answers %>
+
     <% @question.answers.each do |answer| %>
       <article><%= answer.text %></article>
       <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">Edit Answer</a>
       <form method="post" action="/questions/<%= @question.id %>/answers/<%=answer.id%>">  <input type="hidden" name="_method" value="delete">
         <input type="submit" value="Delete">
       </form>
+        <form action = '/questions/vote' method = 'post'>
+      <input type = 'submit' value= 'Upvote'>
     <% end %>
   <% end %>
   <% if @question.comments %>
