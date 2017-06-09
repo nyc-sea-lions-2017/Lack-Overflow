@@ -16,13 +16,13 @@
 
   <!-- Compiled and minified JavaScript -->
 
-          
+
 
 
   <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.2/js/materialize.min.js"></script>
   <script src="/js/application.js"></script>
- 
+
  <nav>
     <div class="nav-wrapper">
       <a href="/" class="brand-logo right">Lack Overflow</a>
@@ -31,7 +31,7 @@
     <li> <a href="/users/<%=current_user.id %>"><%= "#{current_user.name}" %></a></li>
     <li><a href="/logout">Logout</a></li>
     <li><a href="/">home</a></li>
-    <% if params[:question_id] == question.id %>
+        <% if params[:question_id] == question.id %>
      <li><a href='/questions/<%=@question.id%>/edit'>Edit Question</a></li>
     <li><a href='/questions/<%=@question.id%>/answers/new'>New Answer</a></li>
     <% end %>
