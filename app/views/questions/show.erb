@@ -11,13 +11,27 @@
 
   <% if @question.answers %>
   <% @question.answers.each do |answer| %>
-    </form>
-    <article><%= answer.text %></article>
+
+
+    Answer:<article><%= answer.text %></article>
+      <% if !answer.comments.empty? %>
+      Answer Comment: <% answer.comments.each do |comment| %>
+          <%= comment.text%>
+          <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
+            <input type = 'submit' value= 'Upvote'>
+          </form>
+          <% end %>
+
+      <%end%>
+    <br>
+
+    Vote Count: <%= answer.votes.length %>
     <form action = '/questions/vote' method = 'post'>
       <input type = 'submit' value= 'Upvote'>
 
     <% end %>
   <% end %>
+
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
       <article><%= comment.text %></article>

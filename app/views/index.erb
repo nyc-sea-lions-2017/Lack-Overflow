@@ -1,16 +1,19 @@
 
 <div class="container">
-  <h1>Welcome To THe WORLD!</h1>
+
 
   <section class="Questions">
-    <h1>Most asked qudestions</h1>
+    <h1>Most asked questions</h1>
     <ul class="requested">
       <% @question.each do |question| %>
         <li class="QS">
           <article>
-            <a href="/questions/<%= question.id %>"><%= question.title %></a>
+            Vote Count: <%= question.votes.length %>
             <form action = "/questions/<%=question.id%>/vote" method= 'post'>
               <input type='submit' value = 'Upvote'>
+            </form>
+              <%= question.id %>
+            <a href="/questions/<%= question.id %>"><%= question.title %></a>
 
           </article>
         </li>
