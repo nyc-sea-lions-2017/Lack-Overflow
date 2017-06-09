@@ -28,6 +28,9 @@
           <%= comment.text%>
           <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
             <input type = 'submit' value= 'Upvote'>
+            <form action = '/comments/<%=comment.id%>/downvote' method = 'post'>
+              <input type = 'submit' value= 'Downvote'>
+                <input type= 'hidden' name="_method" value='delete'>
           </form>
           <% end %>
 

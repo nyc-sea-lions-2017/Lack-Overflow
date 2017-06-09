@@ -25,3 +25,14 @@ post '/comments/:id/vote' do
     redirect "/questions/#{comment.answer.question.id}"
     end
   end
+
+delete '/comments/:comment_id/downvote' do
+  vote = Vote.find_by(votable_id: params[:comment_id], votable_type: "Comments", voter_id: current_user.id)
+  comment = Comment.find(params[:comment_id])
+  if current_user.id == vote.id
+    vote.destroy
+    redirect "/questions/#{comment.question.id}"
+  else
+    redirect '/login'
+  end
+end
