@@ -13,15 +13,18 @@ end
 
 #new post submission
 post '/questions' do
-  question = Question.new(title:params[:title], body: params[:body], creator_id: session[:user_id])
+  question = Question.new(title:params[:question][:title], body: params[:question][:body], creator_id: session[:user_id])
   question.save
-  redirect "/questions/#{question.question_id}"
+  redirect "/questions/#{question.id}"
 end
 
 
-#get question by question_id
+
+#get question by id
 get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
+  @comments = Comment.find_by(commentable_id: params[:user_id], commentable_type: "Answer")
+  @answers = Answer.find_by(question_id: params[:user_id])
   erb :'/questions/show'
 end
 
@@ -40,12 +43,13 @@ put '/questions/:question_id' do
   redirect "/questions/#{@question.question_id}"
 end
 
-#delete specific question
-post '/questions/:question_id/vote' do
+
+post '/questions/:id/vote' do
   question = Question.find(params[:id])
   if session[:user_id]
-    vote = Vote.new(votable_id:question.id, votable_type: "Question", voter_id: current_user.id)
+    vote = Vote.new(votable_id:params[:id], votable_type: "Question", voter_id: current_user.id)
     vote.save
+    redirect "/questions/#{question.id}"
   else
     redirect '/'
   end
