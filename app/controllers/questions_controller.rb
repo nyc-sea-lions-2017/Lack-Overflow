@@ -13,23 +13,18 @@ end
 
 #new post submission
 post '/questions' do
-  question = Question.new(title:params[:title], body: params[:body], creator_id: session[:user_id])
+  question = Question.new(title:params[:question][:title], body: params[:question][:body], creator_id: session[:user_id])
   question.save
-  redirect "/questions/#{question.question_id}"
+  redirect "/questions/#{question.id}"
 end
 
 
-<<<<<<< HEAD
+
 #get question by id
-get '/questions/:id' do
-  @question = Question.find(params[:id])
-  @comments = Comment.find_by(commentable_id: params[:id], commentable_type: "Answer")
-  @answers = Answer.find_by(question_id: params[:id])
-=======
-#get question by question_id
 get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
->>>>>>> 1e2ea6194c6ec47f36d39c2602196924b2b1a4ea
+  @comments = Comment.find_by(commentable_id: params[:user_id], commentable_type: "Answer")
+  @answers = Answer.find_by(question_id: params[:user_id])
   erb :'/questions/show'
 end
 
