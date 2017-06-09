@@ -3,69 +3,63 @@
 
 
   <h1>Title: <%= @question.title %></h1><br>
-  <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
-  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
-  <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
+    <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
+    <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
+    <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
   <br>
   Question: <article><%= @question.body %></article>
-  <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
+    <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
   <% if current_user && current_user.id == @question.creator_id %>
     <input type="submit" value="Delete">
     </form>
   <%end%>
 
-
-
   <br>
 
   <% if @question.answers %>
+    <% @question.answers.each do |answer| %>
 
-  <% @question.answers.each do |answer| %>
+      Answer:<article><%= answer.text %></article>
+        <% if current_user && current_user.id == answer.answerer_id%>
+          <form method="get" action="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">
+           <input type = 'submit' value= 'edit'>
+          </form>
+          <form method="post" action="/questions/<%=@question.id%>/answers/<%=answer.id%>">
+           <input type = 'submit' value= 'delete'>
+          <input type="hidden" name="_method" value="delete">
+          </form>
+        <% end %>
 
-  Answer:<article><%= answer.text %></article>
-  <% if current_user && current_user.id == answer.answerer_id%>
-  <form method="post" action="/questions/:question_id/answers/<%=answer.id%>">
-  <input type="hidden" name="_method" value="put">
-  </form>
-  <form method="post" action="/questions/:question_id/answers/<%=answer.id%>">
-   <input type="hidden" name="_method" value="delete">
-  </form>
-  <% end %>
-
-      <% if !answer.comments.empty? %>
-      Answer Comment: <% answer.comments.each do |comment| %>
+        <% if !answer.comments.empty? %>
+          Answer Comment: <% answer.comments.each do |comment| %>
           <%= comment.text%>
-          <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
+            <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
             <input type = 'submit' value= 'Upvote'>
             <form action = '/comments/<%=comment.id%>/downvote' method = 'post'>
-              <input type = 'submit' value= 'Downvote'>
-                <input type= 'hidden' name="_method" value='delete'>
-          </form>
+            <input type = 'submit' value= 'Downvote'>
+            <input type= 'hidden' name="_method" value='delete'>
+            </form>
           <% end %>
         <%end%>
-      <%end%>
-    <%end%>
-  <%end%>
-      <br>
+  <br>
 
-    Vote Count: <%= answer.votes.length %>
-    <br>
-    <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/vote' method = 'post'>
-      <input type = 'submit' value= 'Upvote'>
-    </form>
-    <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
-      <input type = 'submit' value='downvote'>
-        <input type= "hidden" name='_method' value='delete'>
-    </form>
-    <% end %>
+  Vote Count: <%= answer.votes.length %>
+  <br>
+  <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/vote' method = 'post'>
+    <input type = 'submit' value= 'Upvote'>
+  </form>
+  <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
+    <input type = 'submit' value='downvote'>
+    <input type= "hidden" name='_method' value='delete'>
+  </form>
 
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
     <article><%= comment.text %></article>
+    <% end %>
   <%else %>
     No questions yet!
-    <% end %>
   <%end%>
-<% end %>
+<%end%>
 <%end%>
 </div>
