@@ -1,0 +1,8 @@
+<div class= 'container'>
+<h1> Create a new answer!</h1>
+  <form action="/questions/<%=@question.id%>/answers" method="post">
+    <textarea name="answer[text]" placeholder='Answer:'style="width:250px;height:150px;"></textarea>
+    <br>
+    <input type='submit' value="Submit">
+  </form>
+</div>
