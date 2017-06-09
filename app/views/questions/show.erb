@@ -41,6 +41,7 @@
     </form>
     <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
       <input type = 'submit' value='downvote'>
+        <input type= "hidden" name='_method' value='delete'>
     </form>
 
 

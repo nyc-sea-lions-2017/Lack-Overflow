@@ -18,8 +18,15 @@ post '/questions' do
   redirect "/questions/#{question.id}"
 end
 
-
-
+delete '/questions/:question_id/answers/:id/downvote' do
+  vote = Vote.find_by(votable_type: "Answer", votable_id: params[:id], voter_id: current_user.id)
+  if vote
+    vote.destroy
+    redirect "/questions/#{params[:question_id]}"
+  else
+    redirect "/questions/#{params[:question_id]}"
+  end
+end
 #get question by id
 get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
