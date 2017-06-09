@@ -4,7 +4,8 @@
 
   <h1>Title: <%= @question.title %></h1><br>
   <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
-  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a><br>
+  <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
+  <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
   <br>
   Question: <article><%= @question.body %></article>
   <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
