@@ -15,6 +15,26 @@
 
   <% if @question.answers %>
 
+  <% @question.answers.each do |answer| %>
+
+
+    Answer:<article><%= answer.text %></article>
+      <% if !answer.comments.empty? %>
+      Answer Comment: <% answer.comments.each do |comment| %>
+          <%= comment.text%>
+          <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
+            <input type = 'submit' value= 'Upvote'>
+          </form>
+          <% end %>
+
+      <%end%>
+    <br>
+
+    Vote Count: <%= answer.votes.length %>
+    <form action = '/questions/vote' method = 'post'>
+      <input type = 'submit' value= 'Upvote'>
+
+
     <% @question.answers.each do |answer| %>
       <article><%= answer.text %></article>
       <a href="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">Edit Answer</a>
@@ -27,6 +47,7 @@
     </form>
     <% end %>
   <% end %>
+
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
       <article><%= comment.text %></article>

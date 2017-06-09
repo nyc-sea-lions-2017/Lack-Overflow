@@ -19,9 +19,17 @@ post '/questions' do
 end
 
 
+<<<<<<< HEAD
+#get question by id
+get '/questions/:id' do
+  @question = Question.find(params[:id])
+  @comments = Comment.find_by(commentable_id: params[:id], commentable_type: "Answer")
+  @answers = Answer.find_by(question_id: params[:id])
+=======
 #get question by question_id
 get '/questions/:question_id' do
   @question = Question.find(params[:question_id])
+>>>>>>> 1e2ea6194c6ec47f36d39c2602196924b2b1a4ea
   erb :'/questions/show'
 end
 
@@ -40,12 +48,13 @@ put '/questions/:question_id' do
   redirect "/questions/#{@question.question_id}"
 end
 
-#delete specific question
 post '/questions/:id/vote' do
+
   question = Question.find(params[:id])
   if session[:user_id]
-    vote = Vote.new(votable_id:question.id, votable_type: "Question", voter_id: current_user.id)
+    vote = Vote.new(votable_id:params[:id], votable_type: "Question", voter_id: current_user.id)
     vote.save
+    redirect "/questions/#{question.id}"
   else
     redirect '/'
   end

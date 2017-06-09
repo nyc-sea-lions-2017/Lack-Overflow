@@ -1,16 +1,26 @@
 
 <div class="container">
+<<<<<<< HEAD
+
+
+  <section class="Questions">
+    <h1>Most asked questions</h1>
+=======
   <h1>Welcome To Lack Overflow!</h1>
 
   <section class="Questions">
     <h1>Commonly asked questions:</h1>
+>>>>>>> 1e2ea6194c6ec47f36d39c2602196924b2b1a4ea
     <ul class="requested">
       <% @question.each do |question| %>
         <li class="QS">
           <article>
-            <a href="/questions/<%= question.id %>"><%= question.title %></a>
+            Vote Count: <%= question.votes.length %>
             <form action = "/questions/<%=question.id%>/vote" method= 'post'>
               <input type='submit' value = 'Upvote'>
+            </form>
+              <%= question.id %>
+            <a href="/questions/<%= question.id %>"><%= question.title %></a>
 
           </article>
         </li>
