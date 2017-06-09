@@ -27,10 +27,10 @@
       <% if !answer.comments.empty? %>
       Answer Comment: <% answer.comments.each do |comment| %>
           <%= comment.text%>
-          <form action = '/comments/<%=comment.id%>/vote' method = 'post'>
-            <input type = 'submit' value= 'Upvote'>
-            <form action = '/comments/<%=comment.id%>/downvote' method = 'post'>
-              <input type = 'submit' value= 'Downvote'>
+          <form class="up-vote" action = '/comments/<%=comment.id%>/vote' method = 'post'>
+            <input class="material-icons green" type = 'submit' value= thumb_up>
+            <form class="down-vote" action = '/comments/<%=comment.id%>/downvote' method = 'post'>
+              <input class="material-icons red" type = 'submit' value=thumb_down>
                 <input type= 'hidden' name="_method" value='delete'>
           </form>
           <% end %>
@@ -40,11 +40,11 @@
 
     Vote Count: <%= answer.votes.length %>
     <br>
-    <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/vote' method = 'post'>
-      <input type = 'submit' value= 'Upvote'>
+    <form class="up-vote" action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/vote' method = 'post'>
+      <input class="material-icons green"type = 'submit' value=thumb_up>
     </form>
-    <form action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
-      <input type = 'submit' value='downvote'>
+    <form class="down-vote" action = '/questions/<%=@question.id%>/answers/<%=answer.id%>/downvote' method = 'post'>
+      <input class="material-icons red" type = 'submit' value=thumb_down>
         <input type= "hidden" name='_method' value='delete'>
     </form>
 
