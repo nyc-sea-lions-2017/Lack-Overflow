@@ -30,18 +30,15 @@
       <a href="/" class="brand-logo right">Lack Overflow</a>
       <ul class="left hide-on-med-and-down">
        <% if logged_in %>
-    <li> <a href="/users/<%=current_user.id %>"><%= "#{current_user.name}" %></a></li>
-    <li><a href="/logout">Logout</a></li>
-    <li><a href="/">home</a></li>
-
-
-
-  <% else %>
-    <li> <a href="/login">Login</a></li>
-    <li> <a href="/users/new">Register</a></li>
-    <% end %>
+        <li> <a href="/users/<%=current_user.id %>"><%= "#{current_user.username}" %></a></li>
+        <li><a href="/sessions/logout">Logout</a></li>
+        <li><a href="/">home</a></li>
         <li><a href="/questions/new">New Question</a></li>
-        </li>
+      <% else %>
+        <li> <a href="/sessions/new">Login</a></li>
+        <li> <a href="/users/new">Register</a></li>
+        <li><a href="/">home</a></li>
+      <% end %>
       </ul>
     </div>
   </nav>

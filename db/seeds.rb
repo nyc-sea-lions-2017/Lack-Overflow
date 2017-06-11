@@ -1,5 +1,5 @@
 10.times do |user|
-  User.create(name: Faker::Name.name, email: Faker::Internet.email, password: Faker::Ancient.titan)
+  User.create(username: Faker::Name.name, email: Faker::Internet.email, password: Faker::Ancient.titan)
 end
 
 user = User.all
