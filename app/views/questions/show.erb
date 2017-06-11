@@ -1,12 +1,17 @@
 <div class= 'container'>
 
 
-
+  <% if current_user && current_user.id == @question.creator_id%>
+     <h1>Title: <%= @question.title %></h1><br>
+      <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
+      <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
+      <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
+  <% else %>
   <h1>Title: <%= @question.title %></h1><br>
-    <a href='/questions/<%=@question.id%>/edit'>Edit Question</a> |
-    <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
-    <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
-  <br>
+      <a href='/questions/<%=@question.id%>/answers/new'>New Answer</a> |
+      <a href='/questions/<%=@question.id%>/comments/new'>Add Comment</a><br>
+  <%end%>
+
   Question: <article><%= @question.body %></article>
     <form method="post" action="/questions/<%= @question.id %>">  <input type="hidden" name="_method" value="delete">
   <% if current_user && current_user.id == @question.creator_id %>
