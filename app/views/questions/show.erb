@@ -24,7 +24,7 @@
   <% if @question.answers %>
     <% @question.answers.each do |answer| %>
 
-      Answer:<article><%= answer.text %></article>
+      Answer: <a href=""></a> <article><%= answer.text %></article>
         <% if current_user && current_user.id == answer.answerer_id%>
             <form method="get" action="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">
             <input type = 'submit' value= 'edit'>
