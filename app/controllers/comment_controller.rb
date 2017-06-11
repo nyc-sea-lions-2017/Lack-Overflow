@@ -1,6 +1,6 @@
 get '/questions/:question_id/comments/new' do
   if current_user
-    erb :comment
+    erb :'comments_on_questions/new'
   else
     redirect '/login'
   end
@@ -13,7 +13,7 @@ end
 
 get '/answers/:answer_id/comments/new' do
   if current_user
-    erb :comment
+    erb :'comments_on_questions/new'
   else
     redirect '/'
   end
