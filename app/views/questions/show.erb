@@ -21,13 +21,13 @@
 
       Answer:<article><%= answer.text %></article>
         <% if current_user && current_user.id == answer.answerer_id%>
-          <form method="get" action="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">
-           <input type = 'submit' value= 'edit'>
-          </form>
-          <form method="post" action="/questions/<%=@question.id%>/answers/<%=answer.id%>">
-           <input type = 'submit' value= 'delete'>
-          <input type="hidden" name="_method" value="delete">
-          </form>
+            <form method="get" action="/questions/<%=@question.id%>/answers/<%=answer.id%>/edit">
+            <input type = 'submit' value= 'edit'>
+            </form>
+            <form method="post" action="/questions/<%=@question.id%>/answers/<%=answer.id%>">
+            <input type = 'submit' value= 'delete'>
+            <input type="hidden" name="_method" value="delete">
+            </form>
         <% end %>
 
         <% if !answer.comments.empty? %>
@@ -43,9 +43,6 @@
           <% end %>
         <%end%>
   <br>
-
-
-      <%end%>
     <br>
 
     Vote Count: <%= answer.votes.length %>
@@ -57,10 +54,7 @@
       <input class="material-icons red" type = 'submit' value=thumb_down>
         <input type= "hidden" name='_method' value='delete'>
     </form>
-
-
-
-  <% end %>
+<% end %>
 
   <% if @question.comments %>
     <% @question.comments.each do |comment| %>
@@ -69,6 +63,5 @@
   <%else %>
     No questions yet!
   <%end%>
-<%end%>
 <%end%>
 </div>
