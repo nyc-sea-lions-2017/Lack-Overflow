@@ -10,7 +10,7 @@ get '/questions/new' do
   if current_user
     erb :'/questions/new'
   else
-    redirect '/login'
+    redirect '/new'
   end
 end
 
@@ -37,7 +37,7 @@ get '/questions/:question_id/edit' do
     @question = Question.find(params[:question_id])
     erb :'/questions/edit'
   else
-    erb :'/sessions/login'
+    erb :'/sessions/new'
   end
 end
 

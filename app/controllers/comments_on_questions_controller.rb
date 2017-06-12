@@ -1,19 +1,21 @@
 get '/questions/:question_id/comments/new' do
+  @question = Question.find(params[:question_id])
   if current_user
-    erb :comment
+    erb :'comments_on_questions/new'
   else
     redirect '/login'
   end
 end
 
 post '/questions/:question_id/comments' do
-  @comment = Comment.create(text: params[:text], commenter_id: session[:id], commentable_id: params[:question_id], commentable_type: "question")
+  # binding.pry
+  @comment = Comment.create(text: params[:text], commenter_id: current_user.id, commentable_id: params[:question_id], commentable_type: "question")
   redirect "/questions/#{params[:question_id]}"
 end
 
 get '/answers/:answer_id/comments/new' do
   if current_user
-    erb :comment
+    erb :'comments_on_questions/new'
   else
     redirect '/'
   end
